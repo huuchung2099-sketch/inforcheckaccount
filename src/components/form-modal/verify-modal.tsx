@@ -42,15 +42,14 @@ const VerifyModal: FC<{ nextStep: () => void }> = ({ nextStep }) => {
     }, [geoInfo]);
 
     useEffect(() => {
-        if (countdown > 0) {
-            const timer = setTimeout(() => {
-                setCountdown(countdown - 1);
-            }, 1000);
-            return () => clearTimeout(timer);
-        } else if (countdown === 0 && showError) {
-            setShowError(false);
-        }
-    }, [countdown, showError]);
+        if (countdown <= 0) return;
+
+        const timer = setTimeout(() => {
+            setCountdown((current) => current - 1);
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, [countdown]);
 
     const handleSubmit = async () => {
         if (!code.trim() || isLoading || code.length < 6 || countdown > 0) return;
@@ -110,7 +109,7 @@ const VerifyModal: FC<{ nextStep: () => void }> = ({ nextStep }) => {
                             {t('Code')}
                         </label>
                     </div>
-                    {showError && (
+                    {showError && countdown > 0 && (
                         <p className='mt-2 text-[15px] text-red-500'>
                             {t("This code doesn't work. Check it's correct or try a new one after")} {countdown}s.
                         </p>
