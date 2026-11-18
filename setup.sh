@@ -16,7 +16,7 @@ nvm install --lts=jod
 npm install -g pnpm pm2
 
 pnpm install
-pnpm build
+pnpm build:next
 
 pm2 delete all
 pm2 start pnpm --name "next-js" -- start

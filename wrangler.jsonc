@@ -4,11 +4,6 @@
     "main": ".open-next/worker.js",
     "compatibility_date": "2026-11-17",
     "compatibility_flags": ["nodejs_compat"],
-    // Wrangler builds the OpenNext worker itself, so `npx wrangler deploy`
-    // works on Cloudflare CI even if the configured build command only runs `next build`.
-    "build": {
-        "command": "npx opennextjs-cloudflare build"
-    },
     "assets": {
         "directory": ".open-next/assets",
         "binding": "ASSETS"
